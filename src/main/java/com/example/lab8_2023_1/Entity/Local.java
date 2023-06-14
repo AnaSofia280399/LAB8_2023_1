@@ -25,8 +25,8 @@ public class Local {
     private String correo;
 
     @OneToOne
-    @JoinColumn(name = "id_empresa", nullable = false)
-    private Local id_empresa;
+    @JoinColumn(name = "idEmpresa", nullable = false)
+    private Empresa idEmpresa;
 
 
 }

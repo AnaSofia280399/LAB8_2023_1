@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_evento", nullable = false)
-    private Integer id_evento;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fecha;
@@ -26,12 +26,12 @@ public class Evento {
     @Column(name = "descripcion", length = 400)
     private String descripcion;
 
-    @Column(name = "path_iamge", length = 100)
+    @Column(name = "path_image", length = 100)
     private String path_image;
 
     @OneToOne
-    @JoinColumn(name = "id_local", nullable = false)
-    private Local id_local;
+    @JoinColumn(name = "idLocal", nullable = false)
+    private Local idLocal;
 
 
 
