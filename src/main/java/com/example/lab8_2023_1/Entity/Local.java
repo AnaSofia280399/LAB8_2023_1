@@ -16,13 +16,13 @@ public class Local {
     private Integer id;
 
     @Column(name = "direccion",  length = 45)
-    private String nombre;
+    private String direccion;
 
     @Column(name = "latitud", length = 45)
-    private String apellido;
+    private String latitud;
 
     @Column(name = "longitud", length = 45)
-    private String correo;
+    private String longitud;
 
     @OneToOne
     @JoinColumn(name = "idEmpresa", nullable = false)
