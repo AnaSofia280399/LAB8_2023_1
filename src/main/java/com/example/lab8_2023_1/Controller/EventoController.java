@@ -75,7 +75,7 @@ public class EventoController {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<HashMap<String,String>> gestionException(HttpServletRequest request){
         HashMap<String,String> responseMap = new HashMap<>();
-        if(request.getMethod().equals("POST")){
+        if(request.getMethod().equals("POST")|| request.getMethod().equals("PUT")){
             responseMap.put("msg","Debe enviar un evento");
 
             responseMap.put("estado","error");
@@ -106,7 +106,7 @@ public class EventoController {
         return ResponseEntity.badRequest().body(responseJson);
     }
 
-    @PutMapping(value = " ")
+    @PutMapping(value = "")
     public ResponseEntity<HashMap<String,Object>> actualizarProducto(@RequestBody Evento product) {
 
         HashMap<String, Object> responseMap = new HashMap<>();
@@ -128,6 +128,34 @@ public class EventoController {
             return ResponseEntity.badRequest().body(responseMap);
         }
     }
+
+
+
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<HashMap<String, Object>> borrarProducto(@PathVariable("id") String idStr) {
+
+        HashMap<String, Object> responseMap = new HashMap<>();
+
+        try {
+            int id = Integer.parseInt(idStr);
+            if (eventoRepository.existsById(id)) {
+                eventoRepository.deleteById(id);
+                responseMap.put("estado", "borrado exitoso");
+                return ResponseEntity.ok(responseMap);
+            } else {
+                responseMap.put("estado", "error");
+                responseMap.put("msg", "no se encontró el evento con id: " + id);
+                return ResponseEntity.badRequest().body(responseMap);
+            }
+        } catch (NumberFormatException ex) {
+            responseMap.put("estado", "error");
+            responseMap.put("msg", "El ID debe ser un número");
+            return ResponseEntity.badRequest().body(responseMap);
+        }
+    }
+
+
 
 
 
